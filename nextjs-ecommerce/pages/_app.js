@@ -1,8 +1,18 @@
+import { ChakraProvider } from "@chakra-ui/react";
+import Layout from "../components/Layout";
+import CartProvider from "../context/cartContext";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-    return <Component {...pageProps }
-    />;
+  return (
+    <CartProvider>
+      <ChakraProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ChakraProvider>
+    </CartProvider>
+  );
 }
 
 export default MyApp;
