@@ -1,3 +1,5 @@
-export default function () {
-  return <div>aboout us page</div>;
+import { Center } from "@chakra-ui/layout";
+
+export default function about() {
+  return <Center h="full">aboout us page</Center>;
 }

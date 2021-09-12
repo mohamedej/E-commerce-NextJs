@@ -6,17 +6,19 @@ import {
   Text,
   Image,
   useDisclosure,
+  Box,
 } from "@chakra-ui/react";
 import { AiOutlinePlus, AiOutlineMinus, AiFillDelete } from "react-icons/ai";
 import ConfirmationModal from "/components/ConfirmationModal";
 import { useCartContext } from "../context/cartContext";
+
 export default function Product({ product, index }) {
   const { cart, removeItem, addSameItem, removeSameItem } = useCartContext();
   const { onOpen, ...modalProps } = useDisclosure();
   return (
     <>
-      <Flex>
-        <Image w={48} h={198} src={product.imageUrl} />
+      <Flex p={4}>
+        <Image h={198} src={product.image} />
         <Flex
           flex="1"
           p={6}
@@ -24,7 +26,12 @@ export default function Product({ product, index }) {
           justifyContent="space-between"
         >
           <Flex justifyContent="space-between" flexDirection="row" w="full">
-            <Text fontWeight="bold">{product.productName}</Text>
+            <Box p={2}>
+              <Text fontWeight="bold" mb={2}>
+                {product.title}
+              </Text>
+              <Text fontSize="sm">{product.description}</Text>
+            </Box>
             <HStack>
               <IconButton
                 icon={<AiOutlinePlus />}

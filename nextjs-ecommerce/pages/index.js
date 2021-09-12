@@ -1,36 +1,25 @@
 import Head from "next/head";
-import { Image, HStack } from "@chakra-ui/react";
+import { Image, Flex, Spacer } from "@chakra-ui/react";
 import Product from "../components/Product";
 import { Image as NextImage } from "next/image";
 import { useCartContext } from "../context/cartContext";
 import { useEffect } from "react";
+import NewProduct from "../components/NewProduct";
 
-const products = [
-  {
-    imageUrl: "/samsung.webp",
-    productName: "Samsung S20",
-    price: 1100,
-    id: "1",
-  },
-  {
-    imageUrl: "/xiaomi.png",
-    productName: "Xiaomi Poco F3",
-    price: 600,
-    id: "2",
-  },
-  {
-    imageUrl: "/iphone.png",
-    productName: "Iphone 12 Black",
-    price: 1200,
-    id: "3",
-  },
-];
+export async function getStaticProps() {
+  const res = await fetch("https://fakestoreapi.com/products");
+  const data = await res.json();
+  return {
+    props: { data },
+  };
+}
 
-export default function Home() {
+function Home({ data }) {
   const { setCart } = useCartContext();
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem("cart") || "[]"));
   }, []);
+
   return (
     <div>
       <Head>
@@ -47,12 +36,17 @@ export default function Home() {
           fit="cover"
           src="/hero.jpg"
         />
-        <HStack spacing={8} direction="row" p={2}>
-          {products.map((product, index) => {
+        <Flex direction="row" p={2} wrap="wrap">
+          {/* {products.map((product, index) => {
+            return <Product {...product} key={index} />;
+          })} */}
+          {data.map((product, index) => {
             return <Product {...product} key={index} />;
           })}
-        </HStack>
+        </Flex>
       </>
     </div>
   );
 }
+
+export default Home;

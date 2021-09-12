@@ -50,14 +50,16 @@ export default function NavCart() {
             </Box>
           </PopoverTrigger>
           <PopoverContent fontSize="sm" w={56}>
-            <PopoverHeader fontWeight="semibold">Shopping Cart</PopoverHeader>
+            <PopoverHeader fontWeight="semibold" textAlign="center">
+              Shopping Cart
+            </PopoverHeader>
             <PopoverBody>
               {cart.length <= 0 ? (
                 <Text>Cart is empty</Text>
               ) : (
                 cart.map((product) => (
                   <Flex alignItems="center" key={product.id}>
-                    <Image w="18" h="24" src={product.imageUrl} />
+                    <Image w="18" h="24" src={product.image} />
                     <Box>
                       <Text>{product.productName}</Text>
                       <Text>{product.price}$</Text>
