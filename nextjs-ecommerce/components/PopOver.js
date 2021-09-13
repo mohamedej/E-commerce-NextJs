@@ -53,7 +53,7 @@ export default function NavCart() {
             <PopoverHeader fontWeight="semibold" textAlign="center">
               Shopping Cart
             </PopoverHeader>
-            <PopoverBody>
+            <PopoverBody height="400px" overflowY="auto">
               {cart.length <= 0 ? (
                 <Text>Cart is empty</Text>
               ) : (
