@@ -11,9 +11,10 @@ import {
   Image,
   Flex,
 } from "@chakra-ui/react";
+import Link from "next/link";
 
 export default function ProductModal({ isOpen, onClose, action, product }) {
-  const { description, price, title, image } = product;
+  const { description, price, title, image, id } = product;
   return (
     <>
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
@@ -34,6 +35,7 @@ export default function ProductModal({ isOpen, onClose, action, product }) {
           <ModalFooter>
             <Flex justifyContent="space-between" alignItems="center" w="full">
               <Text>Price : {price} $</Text>
+
               <Button colorScheme="blue" mr={3} onClick={onClose}>
                 Close
               </Button>

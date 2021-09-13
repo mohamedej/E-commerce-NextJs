@@ -1,10 +1,9 @@
 import Head from "next/head";
-import { Image, Flex, Spacer } from "@chakra-ui/react";
+import { Image, Flex } from "@chakra-ui/react";
 import Product from "../components/Product";
 import { Image as NextImage } from "next/image";
 import { useCartContext } from "../context/cartContext";
 import { useEffect } from "react";
-import NewProduct from "../components/NewProduct";
 
 export async function getStaticProps() {
   const res = await fetch("https://fakestoreapi.com/products");
