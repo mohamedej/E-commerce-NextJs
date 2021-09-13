@@ -58,8 +58,13 @@ export default function NavCart() {
                 <Text>Cart is empty</Text>
               ) : (
                 cart.map((product) => (
-                  <Flex alignItems="center" key={product.id}>
-                    <Image w="18" h="24" src={product.image} />
+                  <Flex
+                    alignItems="center"
+                    key={product.id}
+                    justifyContent="space-evenly"
+                    p={2}
+                  >
+                    <Image w={20} src={product.image} />
                     <Box>
                       <Text>{product.productName}</Text>
                       <Text>{product.price}$</Text>

@@ -27,11 +27,15 @@ export default function ProductPage({ products }) {
             fontSize="2xl"
             fontWeight="bold"
             borderBottom="1px"
-            borderColor="gray.200"
+            borderColor="orange.200"
           >
             {products.title}
           </Text>
-          <Text fontSize="sm">{products.description}</Text>
+          <VStack>
+            <Text fontWeight="bold"> Description </Text>
+            <Text fontSize="sm">{products.description}</Text>
+          </VStack>
+
           <Flex justifyContent="space-between" w="full">
             <HStack alignItems="start" textAlign="center">
               <StarIcon color="orange" />
