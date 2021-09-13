@@ -15,18 +15,23 @@ export default function ProductPage({ products }) {
       direction="column"
       justifyContent="center"
       alignItems="center"
-      minH="full"
-      p={4}
+      h="full"
+      backgroundImage="linear-gradient(rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0.1)) , url(/bg.jpg)"
     >
-      <HStack shadow="md" rounded="lg" p={4} spacing={12}>
+      <HStack shadow="lg" rounded="lg" p={4} spacing={12} bg="white">
         <Box w={240}>
           <Image src={products.image} as={NextImage} />
         </Box>
         <VStack w={420} spacing={12} textAlign="center">
-          <Text fontSize="2xl" fontWeight="bold">
+          <Text
+            fontSize="2xl"
+            fontWeight="bold"
+            borderBottom="1px"
+            borderColor="gray.200"
+          >
             {products.title}
           </Text>
-          <Text fontSize="sm"> {products.description}</Text>
+          <Text fontSize="sm">{products.description}</Text>
           <Flex justifyContent="space-between" w="full">
             <HStack alignItems="start" textAlign="center">
               <StarIcon color="orange" />
@@ -39,13 +44,18 @@ export default function ProductPage({ products }) {
               <span style={{ color: "orange" }}> Price:</span> {products.price}$
             </Text>
           </Flex>
-          <Flex justifyContent="space-evenly" w="full">
+          <Flex justifyContent="space-between" w="full">
             <Link href="/">
-              <Button>Back</Button>
+              <Button w={16} rounded="sm" fontWeight="extrabold">
+                Back
+              </Button>
             </Link>
 
             <Button
               colorScheme="orange"
+              w={24}
+              rounded="sm"
+              fontWeight="extrabold"
               onClick={() => {
                 addItem(products);
                 toast({

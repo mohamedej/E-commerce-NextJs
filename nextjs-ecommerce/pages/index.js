@@ -6,7 +6,7 @@ import { useCartContext } from "../context/cartContext";
 import { useEffect } from "react";
 
 export async function getStaticProps() {
-  const res = await fetch("https://fakestoreapi.com/products");
+  const res = await fetch("https://fakestoreapi.com/products?limit=10");
   const data = await res.json();
   return {
     props: { data },
