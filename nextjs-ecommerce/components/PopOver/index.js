@@ -2,7 +2,7 @@ import {
   Box,
   Flex,
   IconButton,
-  Image,
+  VStack,
   Popover,
   PopoverBody,
   PopoverContent,
@@ -12,16 +12,17 @@ import {
   Text,
   Button,
 } from "@chakra-ui/react";
-import { RiShoppingCart2Fill } from "react-icons/ri";
+import { RiShoppingCart2Fill, RiDeleteBin5Fill } from "react-icons/ri";
 import NextLink from "next/link";
-import { useCartContext } from "../context/cartContext";
+import { useCartContext } from "../../context/cartContext";
 import React from "react";
+import PopOverCart from "./PopOverCartItem";
 
 export default function NavCart() {
-  const { cart } = useCartContext();
+  const { cart, totalPrice } = useCartContext();
   const initRef = React.useRef();
   return (
-    <Popover placement="auto" initialFocusRef={initRef}>
+    <Popover placement="auto">
       {({ onClose }) => (
         <>
           <PopoverTrigger>
@@ -49,36 +50,51 @@ export default function NavCart() {
               </Flex>
             </Box>
           </PopoverTrigger>
-          <PopoverContent fontSize="sm" w={56}>
+          <PopoverContent fontSize="sm" w={80}>
             <PopoverHeader fontWeight="semibold" textAlign="center">
               Shopping Cart
             </PopoverHeader>
-            <PopoverBody height="400px" overflowY="auto">
+            <PopoverBody height="350px" overflowY="auto">
               {cart.length <= 0 ? (
                 <Text>Cart is empty</Text>
               ) : (
-                cart.map((product) => (
-                  <Flex
-                    alignItems="center"
-                    key={product.id}
-                    justifyContent="space-evenly"
-                    p={2}
-                  >
-                    <Image w={20} src={product.image} />
-                    <Box>
-                      <Text>{product.productName}</Text>
-                      <Text>{product.price}$</Text>
-                      <Text>{product.quantity}</Text>
-                    </Box>
-                  </Flex>
+                cart.map((product, index) => (
+                  <PopOverCart
+                    key={index}
+                    product={product}
+                    currentIndex={index}
+                    cart={cart}
+                  />
                 ))
               )}
             </PopoverBody>
-            <PopoverFooter justifyContent="center" alignItems="center">
+            <PopoverFooter
+              as={VStack}
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Flex
+                w="full"
+                justifyContent="space-between"
+                fontSize="12px"
+                mb={2}
+              >
+                <Text fontWeight="bold">
+                  {cart.length} {cart.length > 1 ? "items" : "item"}
+                </Text>
+                <VStack>
+                  <Text>Cart Total:</Text>
+                  <Text fontWeight="bold">${totalPrice}</Text>
+                </VStack>
+              </Flex>
               <NextLink href="/cart">
-                <Button onClick={onClose} colorScheme="orange">
-                  {" "}
-                  Open Cart{" "}
+                <Button
+                  w={60}
+                  onClick={onClose}
+                  colorScheme="orange"
+                  rounded="none"
+                >
+                  Open Cart
                 </Button>
               </NextLink>
             </PopoverFooter>
